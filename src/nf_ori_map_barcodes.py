@@ -134,6 +134,9 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
             #print(len(set(v)))
             #print(len(v))
         pickle.dump(coords_to_barcodes, open(coords_to_barcodes_fn, 'wb'))
+
+        print('MRH: Number of unique coordinates with barcodes: ', len(coords_to_barcodes))
+
     return pickle.load(open(coords_to_barcodes_fn, 'rb'))
 
 def save_barcodes_per_candidate(d, fn):
