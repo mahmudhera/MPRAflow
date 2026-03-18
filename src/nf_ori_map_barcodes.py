@@ -109,6 +109,11 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
         print(f'MRH: Number of total reads (times the loop ran): {num_reads}')
         print(f"MRH: baseq: {baseq} mapq: {mapq} cigar: {cigar}")
 
+        # in a file, write all query to coord info, and show full path to the file
+        with open(f'mrh_query_to_coords.txt', 'w') as f:
+            for query, coord in query_to_coords.items():
+                f.write(f'{query}\t{coord}\n')
+            print(f'MRH: query to coord mapping saved to {os.path.abspath(f.name)}')
 
         print(f'bad pairs: {bad_pairs} poor quality: {poor_quality}')
         #print(query_to_coords)
