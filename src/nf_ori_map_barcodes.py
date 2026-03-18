@@ -71,8 +71,10 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
         bad_pairs = 0
         poor_quality = 0
         print('start')
+        num_reads = 0
         #get names of the aligned reads that havae a high enough quality and match sequence
         for i, read in tqdm(enumerate(bam), 'paired-end reads', total = n_bam_records):
+            num_reads += 1
             #print(read.cigarstring)
             #print(read)
             #print(read.reference_name)
@@ -104,6 +106,7 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
 
         # print stats about query_to_coords
         print(f'MRH: Number of aligned reads: {len(query_to_coords)}')
+        print(f'MRH: Number of total reads (times the loop ran): {num_reads}')
 
 
         print(f'bad pairs: {bad_pairs} poor quality: {poor_quality}')
