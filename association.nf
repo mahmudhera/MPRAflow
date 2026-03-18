@@ -446,6 +446,7 @@ process 'collect_chunks'{
 */
 
 process 'map_element_barcodes' {
+    echo true
     tag "assign"
     label "shorttime"
     publishDir "${params.outdir}/${params.name}", mode:'copy'
@@ -478,8 +479,15 @@ process 'map_element_barcodes' {
         cat ${count_fastq}
         cat ${count_bam}
 
+        # echo the command
+        echo "python ${"$baseDir"}/src/nf_ori_map_barcodes.py ${"$baseDir"} ${fastq_bc} ${count_fastq} \
+        $bam ${count_bam} ${name} ${mapq} ${baseq} ${cigar}"
+
         python ${"$baseDir"}/src/nf_ori_map_barcodes.py ${"$baseDir"} ${fastq_bc} ${count_fastq} \
         $bam ${count_bam} ${name} ${mapq} ${baseq} ${cigar}
+
+
+
         """
 }
 
