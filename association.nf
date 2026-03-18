@@ -286,6 +286,7 @@ process 'create_BWA_ref' {
     shell:
         """
         #!/bin/bash
+        set -x
         bwa index -a bwtsw $design
         samtools faidx $design
         picard CreateSequenceDictionary REFERENCE=$design OUTPUT=$design".dict"
