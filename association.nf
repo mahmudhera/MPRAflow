@@ -45,7 +45,7 @@ def helpMessage() {
       --labels                      tsv with the oligo pool fasta and a group label (ex: positive_control) if no labels desired a file will be automatically generated
 
     Extras:
-      --h, --help                   Print this help message
+      --h, --help                   Print this help message (this is MRH's fork)
       --email                       Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits
     """.stripIndent()
 }
