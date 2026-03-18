@@ -107,6 +107,7 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
         # print stats about query_to_coords
         print(f'MRH: Number of aligned reads: {len(query_to_coords)}')
         print(f'MRH: Number of total reads (times the loop ran): {num_reads}')
+        print(f"MRH: baseq: {baseq} mapq: {mapq} cigar: {cigar}")
 
 
         print(f'bad pairs: {bad_pairs} poor quality: {poor_quality}')
