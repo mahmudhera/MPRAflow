@@ -100,7 +100,11 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
                 else:
                     if read.cigarstring==cigar:
                         if isinstance(read.reference_name, str):
-                            query_to_coords[read.query_name] = read.reference_name           
+                            query_to_coords[read.query_name] = read.reference_name
+
+        # print stats about query_to_coords
+        print(f'MRH: Number of aligned reads: {len(query_to_coords)}')
+
 
         print(f'bad pairs: {bad_pairs} poor quality: {poor_quality}')
         #print(query_to_coords)
