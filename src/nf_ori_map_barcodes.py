@@ -23,18 +23,18 @@ mapq=sys.argv[7]
 baseq=sys.argv[8]
 cigar=sys.argv[9]
 
-print(project_dir)
-print(fastq_in)
+#print(project_dir)
+#print(fastq_in)
 #print(n_fastq)
-print(bamfile)
+#print(bamfile)
 #print(n_bam)
 
 if cigar=='n':
     cigar=''
 
 
-print(n_fastq_f)
-print(n_bam_f)
+#print(n_fastq_f)
+#print(n_bam_f)
 with open(n_fastq_f, 'r') as file:
     n_fastq = file.read().replace('\n','')
 
@@ -44,9 +44,9 @@ with open(n_fastq_f, 'r') as file:
 with open(n_bam_f, 'r') as file:
     n_bam = file.read().replace('\n','')
 
-print('counts')
-print(n_bam)
-print(n_fastq)
+#print('counts')
+#print(n_bam)#
+#print(n_fastq)
 #map coords to BCs and filter based on given read/map quality and an exact cigar string if provided
 def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,cigar=''):
     coords_to_barcodes_fn = f'{prefix}_coords_to_barcodes.pickle'
@@ -56,7 +56,7 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
         #fastq = pysam.FastxFile(f'{project_dir}/Gracie-assoc_S4_R2_001.fastq')
         fastq = pysam.FastxFile(fastq_in)
         #n_fastq_records = 1205322 # (wc -l) / 4
-        print(n_fastq)
+        #print(n_fastq)
         n_fastq_records = float(n_fastq)/4 # (wc -l) / 4
         
         #bam = pysam.AlignmentFile(f'{project_dir}/library.bam', 'rb')
@@ -70,7 +70,7 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
         query_to_coords = {}
         bad_pairs = 0
         poor_quality = 0
-        print('start')
+        #print('start')
         num_reads = 0
         #get names of the aligned reads that havae a high enough quality and match sequence
         for i, read in tqdm(enumerate(bam), 'paired-end reads', total = n_bam_records):
@@ -105,22 +105,22 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
                             query_to_coords[read.query_name] = read.reference_name
 
         # print stats about query_to_coords
-        print(f'MRH: Number of aligned reads: {len(query_to_coords)}')
-        print(f'MRH: Number of total reads (times the loop ran): {num_reads}')
-        print(f"MRH: baseq: {baseq} mapq: {mapq} cigar: {cigar}")
+        #print(f'MRH: Number of aligned reads: {len(query_to_coords)}')
+        #print(f'MRH: Number of total reads (times the loop ran): {num_reads}')
+        #print(f"MRH: baseq: {baseq} mapq: {mapq} cigar: {cigar}")
 
         # in a file, write all query to coord info, and show full path to the file
-        with open(f'mrh_query_to_coords.txt', 'w') as f:
-            for query, coord in query_to_coords.items():
-                f.write(f'{query}\t{coord}\n')
-            print(f'MRH: query to coord mapping saved to {os.path.abspath(f.name)}')
+        #with open(f'mrh_query_to_coords.txt', 'w') as f:
+        #    for query, coord in query_to_coords.items():
+        #        f.write(f'{query}\t{coord}\n')
+        #    print(f'MRH: query to coord mapping saved to {os.path.abspath(f.name)}')
 
-        print(f'bad pairs: {bad_pairs} poor quality: {poor_quality}')
+        #print(f'bad pairs: {bad_pairs} poor quality: {poor_quality}')
         #print(query_to_coords)
         #print(read.reference_name)
         #print(fastq)
         #print(bam)
-        print("start")
+        #print("start")
         coords_to_barcodes = defaultdict(list)
         ###get get barcodes for the aligned reads that passed QC
         for i, barcode in tqdm(enumerate(fastq), 'barcodes', total = n_fastq_records):
@@ -141,7 +141,7 @@ def get_coords_to_barcodes(fastq_in, n_fastq,bamfile,n_bam,mapq=30,baseq=30,ciga
             #print(len(v))
         pickle.dump(coords_to_barcodes, open(coords_to_barcodes_fn, 'wb'))
 
-        print('MRH: Number of unique coordinates with barcodes: ', len(coords_to_barcodes))
+        #print('MRH: Number of unique coordinates with barcodes: ', len(coords_to_barcodes))
 
     return pickle.load(open(coords_to_barcodes_fn, 'rb'))
 

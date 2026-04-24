@@ -28,6 +28,7 @@ label_file.columns=['coord','label']
 
 #function to get rid of lowly covered BCs and get rid of BCs that map to multiple other enhancers
 def covered_no_perm(min_threshold,min_frac, mydict):
+    print("******** MRH: This was called! ********")
     out_dict={}
     #count coverage of all bcs
     all_bcs=(mydict.values())
