@@ -38,6 +38,11 @@ def covered_no_perm(min_threshold,min_frac, mydict):
     # show info for TACCGGAGATACGCC
     print("******** MRH: This is the count for TACCGGAGATACGCC ********")
     print(counts['TACCGGAGATACGCC'])
+    # show min_threshold and min_frac
+    print("******** MRH: This is the min_threshold ********")
+    print(min_threshold)
+    print("******** MRH: This is the min_frac ********")
+    print(min_frac)
     
     #filter bcs that are not mapping in the majority to the insert and do not meet the minimum coverage in that insert
     for k,v in mydict.items():
@@ -45,12 +50,21 @@ def covered_no_perm(min_threshold,min_frac, mydict):
         new_v=[]
         for i in v:
             #print(i)
+            if i == 'TACCGGAGATACGCC':
+                print("******** MRH: This is the count for TACCGGAGATACGCC in this insert ********")
+                print(bc_counts[i])
             if(bc_counts[i]>=int(min_threshold)):
                 #print(bc_counts[i])
                 per=float((bc_counts[i]/counts[i]))
+                if i == 'TACCGGAGATACGCC':
+                    print('******** MRH: entered stage1 for TACCGGAGATACGCC ********')
+                    print(per)
                 if(per>=float(min_frac)):
                     #print(per)
                     new_v.append(i)
+                    if i == 'TACCGGAGATACGCC':
+                        print('******** MRH: entered stage2 for TACCGGAGATACGCC ********')
+                        print(per)
         out_dict[k]=set(new_v) 
 
     return(out_dict)
