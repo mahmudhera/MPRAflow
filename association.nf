@@ -66,12 +66,12 @@ params.plaintext_email = false
 output_docs = file("$baseDir/docs/output.md")
 
 //defaults
-params.min_cov="3"
-params.min_frac="0.5"
-params.baseq="30"
-params.mapq="30"
-params.cigar="n"
-params.split=2000000
+params.min_cov=params.min_cov ?: "3"
+params.min_frac=params.min_frac ?: "0.5"
+params.baseq=params.baseq ?: "30"
+params.mapq=params.mapq ?: "30"
+params.cigar=params.cigar ?: "n"
+params.split=params.split ?: 2000000
 
 
 // Validate inputs
