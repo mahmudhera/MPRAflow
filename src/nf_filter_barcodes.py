@@ -34,6 +34,10 @@ def covered_no_perm(min_threshold,min_frac, mydict):
     all_bcs=(mydict.values())
     flat_BC = [item for sublist in all_bcs for item in sublist]
     counts=Counter(flat_BC)
+
+    # show info for TACCGGAGATACGCC
+    print("******** MRH: This is the count for TACCGGAGATACGCC ********")
+    print(counts['TACCGGAGATACGCC'])
     
     #filter bcs that are not mapping in the majority to the insert and do not meet the minimum coverage in that insert
     for k,v in mydict.items():
