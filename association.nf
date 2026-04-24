@@ -497,6 +497,7 @@ process 'map_element_barcodes' {
 */
 
 process 'filter_barcodes' {
+    echo true
     tag "$filter"
     label "shorttime"
     publishDir "${params.outdir}/${params.name}", mode:'copy'
@@ -519,6 +520,9 @@ process 'filter_barcodes' {
 
     shell:
         """
+        # echo the command
+        echo "python ${"$baseDir"}/src/nf_filter_barcodes.py ${out} ${map} ${table} \
+        ${min_cov} ${min_frac} $label"
         python ${"$baseDir"}/src/nf_filter_barcodes.py ${out} ${map} ${table} \
         ${min_cov} ${min_frac} $label
         """
