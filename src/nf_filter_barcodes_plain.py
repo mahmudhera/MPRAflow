@@ -88,6 +88,8 @@ def create_lib_plots(c_obj, plot_name, sum_name,lab_opt="FALSE"):
     #summary.to_csv(sum_name, index=False,)
     df.describe().to_csv(sum_name)
 
+print("******** MRH: This main_plain was called! ********")
+
 #plot original data
 create_lib_plots(pd.read_feather(count_table),pref+"_original_counts.png","original_count_summary.txt","TRUE")
 #filter and plot new data
